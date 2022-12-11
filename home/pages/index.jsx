@@ -6,88 +6,141 @@ import {
   Flex,
   Heading,
   HStack,
+  IconButton,
   Link,
   Text,
   VStack,
 } from "@chakra-ui/react"
 import { ChevronRightIcon } from "@chakra-ui/icons"
+import { motion } from "framer-motion"
 import Image from "next/image"
 
 export default function Home() {
   return (
     <Flex direction='column'>
-      <VStack
-        bgImage='/bg.svg'
-        bgRepeat='no-repeat'
-        bgPos='bottom'
-        bgSize='contain'
-        color='hsla(0, 0%, 19%, 1)'
-        p={8}
-        gap={{ base: 2, md: 20 }}
-        w='full'
-        minH='100vh'
+      <motion.div
+        style={{ position: "relative" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
       >
-        <VStack my={6}>
-          <Image
-            src='/logo_200x200.png'
-            width={50}
-            height={50}
-            alt="The Storyden logo, a Norse 'homestead' rune indicating a cosy place to talk."
-          />
-          <Heading as='h1' fontWeight='bold' fontSize='2xl'>
-            Storyden
-          </Heading>
-        </VStack>
-        <VStack gap={4}>
-          <VStack>
-            <Heading
-              as='h2'
-              fontFamily='p22-mackinac-pro'
-              fontWeight='bold'
-              fontSize='3xl'
-              textAlign='center'
-              px={8}
-            >
-              A forum for the modern age
+        <motion.div
+          style={{
+            position: "absolute",
+            zIndex: "2",
+            left: "380px",
+            top: "120px",
+          }}
+          animate={{ left: "-400px", opacity: 0 }}
+          transition={{ duration: 2, ease: "easeInOut" }}
+        >
+          <Box display={{ base: "none", lg: "inherit" }}>
+            <Image src='/cloud-left.svg' width='880px' height='300px' />
+          </Box>
+        </motion.div>
+        <motion.div
+          style={{
+            position: "absolute",
+            zIndex: "2",
+            right: "280px",
+            top: "200px",
+          }}
+          animate={{ right: "0px", opacity: 0 }}
+          transition={{ duration: 2, ease: "easeInOut" }}
+        >
+          <Box display={{ base: "none", lg: "inherit" }}>
+            <Image src='/cloud-right.svg' width='900px' height='300px' />
+          </Box>
+        </motion.div>
+        <VStack
+          bgImage='/bg.svg'
+          bgRepeat='no-repeat'
+          bgPos='bottom'
+          bgSize='contain'
+          color='hsla(0, 0%, 19%, 1)'
+          p={8}
+          gap={{ base: 2, md: 20 }}
+          w='full'
+          minH='100vh'
+        >
+          <VStack my={6}>
+            <Image
+              src='/logo_200x200.png'
+              width={50}
+              height={50}
+              alt="The Storyden logo, a Norse 'homestead' rune indicating a cosy place to talk."
+            />
+            <Heading as='h1' fontWeight='bold' fontSize='2xl'>
+              Storyden
             </Heading>
-            <Text textAlign='center'>
-              Empower your community with a modern discussion platform
-            </Text>
           </VStack>
-          <HStack spacing={4}>
-            <Button variant='outline'>Documentation</Button>
-            <Button rightIcon={<ChevronRightIcon />}>Get started</Button>
-          </HStack>
-          <Center height={{ base: "0px", md: "150px" }} my='4em !important'>
-            <Divider orientation='vertical' />
-          </Center>
-          <HStack gap={6}>
-            <Image
-              src='/icon-github.svg'
-              width={32}
-              height={32}
-              alt='Github logo'
-            />
-            <Image
-              src='/icon-twitter.svg'
-              width={32}
-              height={32}
-              alt='Twitter logo'
-            />
-          </HStack>
+          <VStack gap={4}>
+            <VStack>
+              <Heading
+                as='h2'
+                fontFamily='p22-mackinac-pro'
+                fontWeight='bold'
+                fontSize='3xl'
+                textAlign='center'
+                px={8}
+              >
+                A forum for the modern age
+              </Heading>
+              <Text textAlign='center'>
+                Empower your community with a modern discussion platform
+              </Text>
+            </VStack>
+            <HStack spacing={4}>
+              <Button variant='outline'>Documentation</Button>
+              <Button rightIcon={<ChevronRightIcon />}>Get started</Button>
+            </HStack>
+            <Center height={{ base: "0px", md: "150px" }} my='4em !important'>
+              <Divider orientation='vertical' />
+            </Center>
+            <HStack gap={6}>
+              <Link isExternal href='https://github.com/Southclaws/storyden'>
+                <IconButton
+                  aria-label='Redirect to github repo'
+                  icon={
+                    <Image
+                      src='/icon-github.svg'
+                      width={24}
+                      height={24}
+                      alt='Github logo'
+                    />
+                  }
+                />
+              </Link>
+              <Link isExternal href='https://twitter.com/Southclaws'>
+                <IconButton
+                  aria-label='Redirect to twitter page'
+                  icon={
+                    <Image
+                      src='/icon-twitter.svg'
+                      width={24}
+                      height={24}
+                      alt='Twitter logo'
+                    />
+                  }
+                />
+              </Link>
+            </HStack>
+          </VStack>
         </VStack>
-      </VStack>
+      </motion.div>
 
       <VStack
         color='primary.contrast'
         bgColor='background.base'
         minH='100vh'
         p={{ base: 10, md: 24 }}
-        gap={{ base: 10, md: 24 }}
+        gap={{ base: 24, md: 32 }}
         justifyContent='center'
       >
         <VStack>
-          <Text textAlign='center'>FEATURES</Text>
+          <Text textAlign='center' color='highlight.text'>
+            FEATURES
+          </Text>
           <Heading
             as='h2'
             fontFamily='p22-mackinac-pro'
@@ -99,61 +152,113 @@ export default function Home() {
             What makes storyden different?
           </Heading>
         </VStack>
-        <HStack gap={{ base: 24, md: 72 }} wrap='wrap' justifyContent='center'>
-          <VStack maxW='280px'>
-            <Image src='/bolt.svg' width='150px' height='250px' quality={100} />
-            <VStack>
-              <Heading
-                as='h3'
-                fontFamily='p22-mackinac-pro'
-                fontWeight='bold'
-                fontSize='2xl'
-                textAlign='center'
-              >
-                Fast
-              </Heading>
-              <Text textAlign='center'>
-                Built with Go, optimised for performance and user experience.
-              </Text>
-            </VStack>
-          </VStack>
-          <VStack maxW='280px'>
-            <Image src='/plus.svg' width='150px' height='250px' quality={100} />
-            <VStack>
-              <Heading
-                as='h3'
-                fontFamily='p22-mackinac-pro'
-                fontWeight='bold'
-                fontSize='2xl'
-                textAlign='center'
-              >
-                Extensible
-              </Heading>
-              <Text textAlign='center'>
-                The ultimate level of customisation: bring your own frontend or
-                app.
-              </Text>
-            </VStack>
-          </VStack>
-          <VStack maxW='280px'>
-            <Image src='/auth.svg' width='150px' height='250px' quality={100} />
-            <VStack>
-              <Heading
-                as='h3'
-                fontFamily='p22-mackinac-pro'
-                fontWeight='bold'
-                fontSize='2xl'
-                textAlign='center'
-              >
-                web3 first
-              </Heading>
-              <Text textAlign='center'>
-                Native support for logging in with crypto wallets - no personal
-                details are inherent to the system
-              </Text>
-            </VStack>
-          </VStack>
-        </HStack>
+        <VStack gap={{ base: 40, md: 72 }} wrap='wrap' justifyContent='center'>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.25 }}
+          >
+            <Flex
+              gap={24}
+              alignItems='center'
+              flexDir={{ base: "column-reverse", md: "row" }}
+            >
+              <VStack alignItems='flex-start' maxW='500px'>
+                <Text color='highlight.text'>EFFICIENT</Text>
+                <Heading
+                  as='h3'
+                  fontFamily='p22-mackinac-pro'
+                  fontWeight='bold'
+                  fontSize='2xl'
+                >
+                  Fast, progressively enhanced, accessible
+                </Heading>
+                <Text>
+                  Built with Go, optimised for performance and user experience,
+                  Storyden places accessibility at it’s forefront and not as an
+                  afterthought.
+                </Text>
+              </VStack>
+
+              <Image
+                src='/bolt.svg'
+                width='250px'
+                height='250px'
+                quality={100}
+              />
+            </Flex>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.25 }}
+          >
+            <Flex
+              gap={24}
+              alignItems='center'
+              flexDir={{ base: "column", md: "row" }}
+            >
+              <Image
+                src='/faceid.svg'
+                width='250px'
+                height='250px'
+                quality={100}
+              />
+              <VStack alignItems='flex-start' maxW='500px'>
+                <Text color='highlight.text'>MODERN</Text>
+                <Heading
+                  as='h3'
+                  fontFamily='p22-mackinac-pro'
+                  fontWeight='bold'
+                  fontSize='2xl'
+                >
+                  Utilizing modern technologies
+                </Heading>
+                <Text>
+                  With support for the latest web technology like WebAuthn,
+                  allowing you to log in using your iPhone's FaceID or TouchID,
+                  YubiKeys, or Windows Hello, Storyden delivers a truly modern
+                  and native experience.
+                </Text>
+              </VStack>
+            </Flex>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.25 }}
+          >
+            <Flex
+              gap={24}
+              alignItems='center'
+              flexDir={{ base: "column-reverse", md: "row" }}
+            >
+              <VStack alignItems='flex-start' maxW='500px'>
+                <Text color='highlight.text'>WEB3 FIRST</Text>
+                <Heading
+                  as='h3'
+                  fontFamily='p22-mackinac-pro'
+                  fontWeight='bold'
+                  fontSize='2xl'
+                >
+                  Modern auth paradigms
+                </Heading>
+                <Text>
+                  With native support for enabling users logging in only with
+                  their crypto wallet - no personal details are inherent to the
+                  system, email address is not a central part of the user
+                  account.
+                </Text>
+              </VStack>
+              <Image
+                src='/auth.svg'
+                width='250px'
+                height='250px'
+                quality={100}
+              />
+            </Flex>
+          </motion.div>
+        </VStack>
       </VStack>
 
       <VStack

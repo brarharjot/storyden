@@ -48,6 +48,9 @@ export const theme = extendTheme({
       active: "#02273B",
       contrast: "#FFFFFF",
     },
+    highlight: {
+      text: "#EAA928",
+    },
     background: {
       base: "#001322",
     },
